@@ -11,7 +11,6 @@ const mutations = {
         state.items.push(todo);
     },
     INIT_TODO: (state, todos) => {
-        console.log('doata', todos)
         state.items = todos;
     },
     EDIT_TODO: (state, todo) => {
@@ -31,6 +30,21 @@ const getters = {
 
     remainingItemsCount: state => getters.remainingItems(state).length,
     finishedItemsCount: state => getters.finishedItems(state).length,
+    todosInEvent: state => {
+        let events = [];
+        for (var todo of state.items) {
+            let color = todo.statut == "Terminée" ? "green" : "orange";
+            let event = {
+                name: todo.nom,
+                start: todo.date,
+                end: todo.date,
+                color: color,
+                timed: false
+            }
+            events.push(event);
+        }
+        return events;
+    },
 };
 const actions = {
     getTodos: store => {
@@ -39,7 +53,6 @@ const actions = {
                 store.commit("INIT_TODO", response.data);
             })
             .catch(error => {
-                // handle error
                 console.error(error);
             });
     },
@@ -102,6 +115,5 @@ export default new Vuex.Store({
     state: state,
     mutations: mutations,
     getters: getters,
-
     actions: actions
 });

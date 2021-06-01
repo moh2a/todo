@@ -94,7 +94,7 @@ export default {
     }),
     computed: {
         ...Vuex.mapGetters([
-            "items",
+            "todos",
             "remainingItemsCount",
             "finishedItemsCount",
             "finishedItems",
@@ -123,27 +123,6 @@ export default {
             let id = ev.dataTransfer.getData("id");
             this.remainingTodo(id);
         }
-        /*deleteItem(todo) {
-            console.log("iii", id);
-            TodoService.delete(id)
-                .then(response => {
-                    this.items = this.items.filter(item => item.id != id);
-                })
-                .catch(error => {
-                    // handle error
-                    console.error(error);
-                });
-        },*/
-        /*update(item) {
-            TodoService.update(item)
-                .then(response => {
-                    console.log(response);
-                })
-                .catch(error => {
-                    // handle error
-                    console.error(error);
-                });
-        }*/
     },
     props: []
 };
